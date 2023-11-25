@@ -31,6 +31,8 @@ def read_events_from_csv(file_path):
     with open(file_path, newline="", encoding="utf-8") as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
+            genres = row["genre"].split(",") if row["genre"] else []
+            formats = row["format"].split(",") if row["format"] else []
             event = Event(
                 id=row["id"],
                 organizer_id=row["organizer_id"],
@@ -40,8 +42,8 @@ def read_events_from_csv(file_path):
                 else None,
                 city=row["city"],
                 country=row["country"],
-                genre=row["genre"],
-                format=row["format"],
+                genre=genres,
+                format = formats,
                 link=row["link"],
                 description=row["description"],
                 address=row["address"],
