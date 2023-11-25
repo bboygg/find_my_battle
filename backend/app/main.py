@@ -1,20 +1,19 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 
 
-from typing import Optional
+from typing import List, Optional
 
 from sqlmodel import Field, Session, SQLModel, create_engine, select, UUID
 
 from datetime import datetime, date, time, timedelta
 
 
-class Event(SQLModel, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
+class EventBase(SQLModel):
     # uuid: Optional[UUID] = Field(default=None)
     name: str
     # genre: str
     # format: str
-    # city: str
+    city: str
     # country: str
     # address: str
     # reg_start: datetime
@@ -22,9 +21,24 @@ class Event(SQLModel, table=True):
     # organizer_id: int # uses user_id
 
 
-postgresql_file_name = "find_my_battle.db"
-postgresql_url = f"postgresql://postgres:password@db:5432/{postgresql_file_name}"
+class Event(EventBase, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
 
+
+class EventCreate(EventBase):
+    pass
+
+
+class EventRead(EventBase):
+    id: int
+
+
+postgresql_file_name = "find_my_battle"
+postgresql_url = (
+    f"postgresql+psycopg://postgres:password@db:5432/{postgresql_file_name}"
+)
+
+# connect_args = {"check_same_thread": False}
 engine = create_engine(postgresql_url, echo=True)
 
 
@@ -33,9 +47,9 @@ def create_db_and_tables():
 
 
 def create_events():
-    event_1 = Event(name="Deadpond")
-    event_2 = Event(name="Spider-Boy")
-    event_3 = Event(name="Rusty-Man")
+    event_1 = Event(name="Breaking", city="Seoul")
+    event_2 = Event(name="Locking", city="Tokyo")
+    event_3 = Event(name="Group", city="Paris")
 
     with Session(engine) as session:
         session.add(event_1)
@@ -45,30 +59,18 @@ def create_events():
         session.commit()
 
 
-def select_events():
-    with Session(engine) as session:
-        events = session.exec(select(Event)).all()
-        return events
+app = FastAPI()
 
 
-def main():
-    pass
-    # create_db_and_tables()
-    # create_events()
-    # select_events()
-
-
-if __name__ == "__main__":
+@app.on_event("startup")
+def on_startup():
     create_db_and_tables()
     create_events()
 
 
-app = FastAPI()
-
-
 @app.get("/")
 def root():
-    return {"message": "Hey Guys!"}
+    return {"message": "Find My Battle!"}
 
 
 """
@@ -88,9 +90,13 @@ async def get_events():
 """
 
 
-@app.get("/events/{id}")
-async def get_events():
-    pass
+@app.get("/events/{event_id}", response_model=EventRead)
+def read_hero(event_id: int):
+    with Session(engine) as session:
+        event = session.get(Event, event_id)
+        if not event:
+            raise HTTPException(status_code=404, detail="Event not found")
+        return event
 
 
 """
@@ -98,9 +104,14 @@ async def get_events():
 """
 
 
-@app.post("/events")
-async def create_evnt():
-    pass
+@app.post("/events/", response_model=EventRead)
+def create_hero(event: EventCreate):
+    with Session(engine) as session:
+        db_event = Event.from_orm(event)
+        session.add(db_event)
+        session.commit()
+        session.refresh(db_event)
+        return db_event
 
 
 """
@@ -108,9 +119,9 @@ async def create_evnt():
 """
 
 
-@app.put("/events/{id}")
-async def update_event():
-    pass
+# @app.put("/events/{id}")
+# async def update_event():
+#     pass
 
 
 """
@@ -118,6 +129,6 @@ async def update_event():
 """
 
 
-@app.delete("/events{id}")
-async def delete_event():
-    pass
+# @app.delete("/events{id}")
+# async def delete_event():
+#     pass
