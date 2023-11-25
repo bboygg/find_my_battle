@@ -10,7 +10,7 @@ const Navigation = ({handleCloseSideBar, HandleShowNavLinks, showNavLinks}) => {
         ${showNavLinks ? "translate-x-0 opacity-100 visible" : "-translate-x-full opacity-0 invisible"}`}>
         {Navigations.map((nav) => {
           return (
-            <li key={nav.id} className='sm:inline-block mx-4 py-1 px-px text-lg font-montserrat cursor-pointer font-medium relative after:absolute after:inset-x-0 after:bg-customBlue after:h-0.5 after:top-full
+            <li key={nav.id} className='sm:inline-block py-1 px-px text-lg font-montserrat cursor-pointer font-medium relative after:absolute after:inset-x-0 after:bg-customBlue after:h-0.5 after:top-full
             after:w-0 after:opacity-0 hover:after:w-[60%] hover:after:opacity-100 transitionAfter' onClick={handleCloseSideBar}>
               <NavLink to={nav.url} end className={({ isActive }) => isActive ?  "text-customBlue" :  "text-customBlack"}>
                 {nav.name}
