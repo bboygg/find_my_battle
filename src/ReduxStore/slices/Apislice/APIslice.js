@@ -9,15 +9,7 @@ export const apiSlice = createApi({
 	baseQuery: fetchBaseQuery({ baseUrl: "/" }),
 
 	// automatic refreshing with cache invalidation
-	tagTypes: [
-		"Post",
-		"ALLPOSTS",
-		"User",
-		"Comment",
-		"Categories",
-		"Tag",
-		"AllComment",
-	],
+	tagTypes: [""],
 
 	// The "endpoints" represent operations and requests for this server
 	endpoints: (builder) => ({}),

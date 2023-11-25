@@ -1,9 +1,48 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { Outlet } from 'react-router-dom'
+import { useWindowSize } from "@uidotdev/usehooks";
+import Navigation from './navigation/Navigation'
 
 const HomeRoute = () => {
+  const [showNavLinks, setShowNavLinks] = useState(false)
+  const size = useWindowSize();
+
+  // Handle opening and closing of navigation bar in small-screen devices
+  const HandleShowNavLinks = () => {
+    setShowNavLinks((state)=> !state)
+  }
+
+  // Handle closing of navigation bar in small-screen devices, when other part of the page is clicked
+  const handleCloseSideBar = () => {
+    setShowNavLinks(() => false)
+  }
+
+  // Handle closing of navigation bar if the screen width changes
+  useEffect (() => {
+    if(size.width >  640) {
+      handleCloseSideBar()
+    }
+  }, [size])
+
   return (
-    <div>
-      
+    <div className='relative'>
+      <header className='fixed top-0 inset-x-0'>
+        <Navigation 
+          showNavLinks={showNavLinks}
+          handleCloseSideBar={handleCloseSideBar} 
+          HandleShowNavLinks={HandleShowNavLinks}
+        />
+      </header>
+
+      <main className='max-w-7xl mx-auto mt-28' onClick={handleCloseSideBar}>
+        <div className='mx-5'>
+          <Outlet />
+        </div>
+      </main>
+
+      <footer>
+
+      </footer>
     </div>
   )
 }

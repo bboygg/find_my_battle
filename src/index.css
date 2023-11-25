@@ -13,7 +13,7 @@
   }
 
   body {
-    @apply m-0 p-0
+    @apply m-0 p-0 bg-black
   }
 
   img {
@@ -31,6 +31,17 @@
 
   textarea {
     @apply h-40
+  }
+}
+
+
+@layer utilities {
+  .transitionAfter {
+    @apply after:transition-all after:duration-300 after:ease-linear after:delay-100
+  }
+
+  .transition {
+    @apply transition-all duration-300 ease-linear delay-100
   }
 }
 
