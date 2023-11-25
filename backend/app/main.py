@@ -1,7 +1,7 @@
-from fastapi import FastAPI, HTTPException, Depends
+from fastapi import FastAPI, HTTPException, Depends, Query
 from typing import List, Optional
 from pydantic import UUID4
-from sqlmodel import Session, select
+from sqlmodel import Session, select, desc, asc
 from .database import create_db_and_tables, create_events, get_session
 from .event_model import Event, EventRead, EventReadAll, EventCreate, EventUpdate
 
@@ -26,9 +26,41 @@ def root():
 
 
 @app.get("/events/", response_model=List[EventReadAll])
-async def get_events(db: Session = Depends(get_session)):
-    events = db.exec(select(Event)).all()
-    print(events)  # Debugging line
+async def read_events(
+    sort_by_name: Optional[str] = Query(None),
+    sort_by_date: Optional[str] = Query(None),
+    sort_by_city: Optional[str] = Query(None),
+    sort_by_country: Optional[str] = Query(None),
+    
+    offset: int = 0,
+    limit: int = Query(default=100, le=100),
+    session: Session = Depends(get_session),
+):
+    events = select(Event)
+    if sort_by_name:
+        if sort_by_name == "asc":
+            events = events.order_by(Event.name)
+        elif sort_by_name == "desc":
+            events = events.order_by(desc(Event.name))
+    if sort_by_date:
+        if sort_by_date == "asc":
+            events = events.order_by(Event.date)
+        elif sort_by_date == "desc":
+            events = events.order_by(desc(Event.date))
+    if sort_by_city:
+        if sort_by_city == "asc":
+            events = events.order_by(Event.city)
+        elif sort_by_city == "desc":
+            events = events.order_by(desc(Event.city))
+    if sort_by_country:
+        if sort_by_country == "asc":
+            events = events.order_by(Event.country)
+        elif sort_by_country == "desc":
+            events = events.order_by(desc(Event.country))
+            
+    events = events.offset(offset).limit(limit)
+
+    events = session.exec(events).all()
     return events
 
 
@@ -38,8 +70,8 @@ async def get_events(db: Session = Depends(get_session)):
 
 
 @app.get("/events/{event_id}", response_model=EventRead)
-def read_hero(event_id: UUID4, db: Session = Depends(get_session)):
-    event = db.get(Event, event_id)
+def read_event(event_id: UUID4, session: Session = Depends(get_session)):
+    event = session.get(Event, event_id)
     if not event:
         raise HTTPException(status_code=404, detail="Event not found")
     return event
@@ -51,12 +83,12 @@ def read_hero(event_id: UUID4, db: Session = Depends(get_session)):
 
 
 @app.post("/events/", response_model=EventRead)
-def create_hero(event: EventCreate, db: Session = Depends(get_session)):
-    db_event = Event.from_orm(event)
-    db.add(db_event)
-    db.commit()
-    db.refresh(db_event)
-    return db_event
+def create_event(event: EventCreate, session: Session = Depends(get_session)):
+    session_event = Event.from_orm(event)
+    session.add(session_event)
+    session.commit()
+    session.refresh(session_event)
+    return session_event
 
 
 """
@@ -66,18 +98,18 @@ def create_hero(event: EventCreate, db: Session = Depends(get_session)):
 
 @app.patch("/events/{event_id}", response_model=EventRead)
 def update_event(
-    event_id: UUID4, event: EventUpdate, db: Session = Depends(get_session)
+    event_id: UUID4, event: EventUpdate, session: Session = Depends(get_session)
 ):
-    db_event = db.get(Event, event_id)
-    if not db_event:
+    session_event = session.get(Event, event_id)
+    if not session_event:
         raise HTTPException(status_code=404, detail="Event not found")
     event_data = event.dict(exclude_unset=True)
     for key, value in event_data.items():
-        setattr(db_event, key, value)
-    db.add(db_event)
-    db.commit()
-    db.refresh(db_event)
-    return db_event
+        setattr(session_event, key, value)
+    session.add(session_event)
+    session.commit()
+    session.refresh(session_event)
+    return session_event
 
 
 """
@@ -86,10 +118,10 @@ def update_event(
 
 
 @app.delete("/event/{event_id}")
-def delete_event(event_id: UUID4, db: Session = Depends(get_session)):
-    event = db.get(Event, event_id)
+def delete_event(event_id: UUID4, session: Session = Depends(get_session)):
+    event = session.get(Event, event_id)
     if not event:
         raise HTTPException(status_code=404, detail="Event not found")
-    db.delete(event)
-    db.commit()
+    session.delete(event)
+    session.commit()
     return {"ok": True}

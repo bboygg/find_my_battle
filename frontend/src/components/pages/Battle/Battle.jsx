@@ -41,7 +41,7 @@ const Battle = () => {
             )
           })
         :
-        <div className='skeleton w-full lg:h-72 h-4 mb-0.5 rounded-sm'></div>
+        <div className='skeleton w-full lg:h-80 h-4 mb-0.5 rounded-sm'></div>
         }
         </ul>
       </div>

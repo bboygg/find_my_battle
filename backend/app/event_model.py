@@ -1,7 +1,7 @@
 from typing import List, Optional
 from pydantic import validator, UUID4
-from sqlmodel import Field, Relationship, SQLModel, UUID
-from datetime import datetime, date, time, timedelta, UTC
+from sqlmodel import Field, Relationship, SQLModel, ARRAY, String, Column
+from datetime import datetime, date
 from uuid import uuid4
 
 
@@ -13,8 +13,8 @@ class EventBase(SQLModel):
     address: str
     city: str
     country: str
-    genre: str
-    format: str
+    genre: List[str] = Field(default=[], sa_column=Column(ARRAY(String())))
+    format: List[str] = Field(default=[], sa_column=Column(ARRAY(String())))  # Changed to a list of strings
     reg_start: Optional[datetime] = Field(default=None)
     reg_end: Optional[datetime] = Field(default=None)
 
@@ -36,13 +36,12 @@ class EventRead(EventBase):
     id: UUID4
     
 class EventReadAll(SQLModel):
-    id: UUID4
     name: Optional[str] = None
     date: Optional[datetime] = None
     city: Optional[str] = None
     country: Optional[str] = None
-    genre: Optional[str] = None
-    format: Optional[str] = None
+    genre: Optional[List[str]] = None
+    format: Optional[List[str]] = None
 
 
 class EventUpdate(SQLModel):
@@ -50,8 +49,8 @@ class EventUpdate(SQLModel):
     city: Optional[str] = None
     description: Optional[str] = None
     link: Optional[str] = None
-    genre: Optional[str] = None
-    format: Optional[str] = None
+    genre: Optional[List[str]] = None
+    format: Optional[List[str]] = None
     country: Optional[str] = None
     address: Optional[str] = None
     reg_start: Optional[date] = None
