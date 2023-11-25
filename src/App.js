@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import "./App.css";
 import HomeRoute from "./components/HomeRoute";
 import NotFound from "./components/pages/notfound/NotFound";
 import Index from "./components/pages/index/Index";
