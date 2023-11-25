@@ -14,6 +14,10 @@
 |-- tests
 |   |-- __init__.py
 |   `-- test_api.py      # Test cases for your API
+| Mock Data.csv
+| pyvenv.cfg
+| README.md
+| requirements.txt
 /frontend
 |-- public
 |   |-- favicon.ico
@@ -33,6 +37,5 @@
 |-- package.json
 |-- tailwind.config.js
 /
-|-- compose.yml   # Docker compose for service orchestration
-`-- README.md
-
+| compose.yml   # Docker compose for service orchestration
+` README.md
