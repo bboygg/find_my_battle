@@ -40,7 +40,7 @@ const Index = () => {
 
         <div className='w-full overflow-scroll md:overflow-visible'>
           <ul className='text-stone-800 font-poppins bg-white px-10 py-7 min-w-[768px]'>
-            {EventList?.map((event) => {
+            {EventList.slice(0, 11)?.map((event) => {
               return (
                 <li key={event.id} className="even:bg-[#e2e2e2] group py-2 px-2 rounded capitalize cursor-pointer text-sm lg:text-base grid grid-cols-6 gap-x-4 first:font-semibold first:text-lg first:font-round">
                   <div className='col-span-1'> 
