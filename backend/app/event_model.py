@@ -21,13 +21,11 @@ class EventBase(SQLModel):
 
 class Event(EventBase, table=True):
     id: Optional[UUID4] = Field(default_factory=uuid4, primary_key=True)
-    organizer_id: UUID4 | None = Field(default=None)  # uses user_id
-    # organizer_id: Optional[UUID4] = Field(default=uuid4)
+    organizer_id: UUID4 | None = Field(default=None)  # uses user_id    
     
-    
-    # @validator('id', pre=True, always=True)
-    # def default_id(cls, v):
-    #     return v or uuid4()
+    @validator('id', pre=True, always=True)
+    def default_id(cls, v):
+        return v or uuid4()
 
 
 class EventCreate(EventBase):
@@ -39,12 +37,12 @@ class EventRead(EventBase):
     
 class EventReadAll(SQLModel):
     id: UUID4
-    name: str
-    date: datetime = Field(default=None)
-    city: str
-    country: str
-    genre: str
-    format: str
+    name: Optional[str] = None
+    date: Optional[datetime] = None
+    city: Optional[str] = None
+    country: Optional[str] = None
+    genre: Optional[str] = None
+    format: Optional[str] = None
 
 
 class EventUpdate(SQLModel):
