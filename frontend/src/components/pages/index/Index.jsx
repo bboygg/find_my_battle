@@ -1,12 +1,15 @@
 import React from 'react'
 import logo from "./../../../assets/images/logo-trans.png"
-import { EventList } from '../../../data'
 import { Button, EventListHead } from '../../sharedComponents/SharedComponents'
 import { Link } from 'react-router-dom'
+import { useFetchedEvents } from '../../../Spinners/BattleSpinner'
 
 const Index = () => {
+  const {content , action, isFetching} = useFetchedEvents()
+  const Event = content
+ 
   return (
-    <article className='text-white'>
+    <article className={`text-white ${isFetching && "after:opacity-40 after:bg-white relative after:absolute after:inset-0 after:z-40"}`}>
 
       {/* ==== Hero section === */}
       <section className='border-4 border-solid border-customBlue rounded-xl px-4 md:px-12 xl:px-20 lg:px-16 py-20 my-20'>
@@ -41,11 +44,11 @@ const Index = () => {
         <div className='w-full overflow-scroll md:overflow-visible'>
           <ul className='text-stone-800 font-montserrat bg-white px-10 py-7 min-w-[768px] rounded-sm'>
             <EventListHead index={true}/>
-            {EventList?.map((event) => {
+            {action ? Event.slice(0, 10)?.map((event) => {
               return (
                 <li key={event.id} className="even:bg-[#e2e2e2] group py-2 px-2 rounded capitalize cursor-pointer text-sm lg:text-base grid grid-cols-6 gap-x-4">
                   <div className='col-span-1'> 
-                    {event.date}
+                    {event.date.substring(0, 10)}
                   </div>
 
                   <div className='col-span-2'>
@@ -53,19 +56,22 @@ const Index = () => {
                   </div>    
 
                   <div className='col-span-1'>
-                    {event.location}
+                    {event.country}
                   </div> 
 
                   <div className='col-span-1'>
-                    {event.Genre}
+                    {event.genre}
                   </div>   
 
                   <div className='col-span-1'>
-                    {event.Format}
+                    {event.format}
                   </div>    
                 </li>
               )
-            })}
+            })
+            :
+            <div className='skeleton w-full lg:h-72 h-4 mb-0.5 rounded-sm'></div>
+            }
           </ul>
         </div>
 
