@@ -23,15 +23,13 @@ services:
     build: ./frontend
     ports:
       - "80:80"
-    # depends_on:
-    #   - backend
     restart: always
 
   backend:
     build: ./backend
-    command: bash -c "uvicorn backend.app.main:app --host 0.0.0.0 --port 8000 --reload"
+    command: bash -c "uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
     volumes:
-      - .:/backend
+    - ./backend:/backend
     ports:
       - "8000:8000"
     depends_on:

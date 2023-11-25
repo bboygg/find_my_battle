@@ -1,61 +1,8 @@
-from fastapi import FastAPI, HTTPException
-
-
+from fastapi import FastAPI, HTTPException, Depends
 from typing import List, Optional
-
-from sqlmodel import Field, Session, SQLModel, create_engine, select, UUID
-
-from datetime import datetime, date, time, timedelta
-
-
-class EventBase(SQLModel):
-    # uuid: Optional[UUID] = Field(default=None)
-    name: str
-    # genre: str
-    # format: str
-    city: str
-    # country: str
-    # address: str
-    # reg_start: datetime
-    # reg_end: Optional[datetime] = Field(default=None)
-    # organizer_id: int # uses user_id
-
-
-class Event(EventBase, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
-
-
-class EventCreate(EventBase):
-    pass
-
-
-class EventRead(EventBase):
-    id: int
-
-
-postgresql_file_name = "find_my_battle"
-postgresql_url = (
-    f"postgresql+psycopg://postgres:password@db:5432/{postgresql_file_name}"
-)
-
-engine = create_engine(postgresql_url, echo=True)
-
-
-def create_db_and_tables():
-    SQLModel.metadata.create_all(engine)
-
-
-def create_events():
-    event_1 = Event(name="Breaking", city="Seoul")
-    event_2 = Event(name="Locking", city="Tokyo")
-    event_3 = Event(name="Group", city="Paris")
-
-    with Session(engine) as session:
-        session.add(event_1)
-        session.add(event_2)
-        session.add(event_3)
-
-        session.commit()
+from .database import create_db_and_tables, create_events, get_session
+from .event_model import Event, EventRead, EventCreate, EventUpdate
+from sqlmodel import Session, select
 
 
 app = FastAPI()
@@ -78,25 +25,22 @@ def root():
 
 
 @app.get("/events/")
-async def get_events():
-    with Session(engine) as session:
-        events = session.exec(select(Event)).all()
-        return events
+async def get_events(db: Session = Depends(get_session)):
+    events = db.exec(select(Event)).all()
+    return events
 
 
 """
-    GET EVENT
+    GET EVENT BY ID
 """
 
 
 @app.get("/events/{event_id}", response_model=EventRead)
-def read_hero(event_id: int):
-    with Session(engine) as session:
-        event = session.get(Event, event_id)
-        if not event:
-            raise HTTPException(status_code=404, detail="Event not found")
-        return event
-
+def read_hero(event_id: int, db: Session = Depends(get_session)):
+    event = db.get(Event, event_id)
+    if not event:
+        raise HTTPException(status_code=404, detail="Event not found")
+    return event
 
 """
     POST EVENT
@@ -104,23 +48,30 @@ def read_hero(event_id: int):
 
 
 @app.post("/events/", response_model=EventRead)
-def create_hero(event: EventCreate):
-    with Session(engine) as session:
+def create_hero(event: EventCreate, db: Session = Depends(get_session)):
         db_event = Event.from_orm(event)
-        session.add(db_event)
-        session.commit()
-        session.refresh(db_event)
+        db.add(db_event)
+        db.commit()
+        db.refresh(db_event)
         return db_event
 
-
 """
-    PUT EVENT
+    PATCH EVENT
 """
 
 
-# @app.put("/events/{id}")
-# async def update_event():
-#     pass
+@app.patch("/events/{event_id}", response_model=EventRead)
+def update_event(event_id: int, event: EventUpdate, db: Session = Depends(get_session)):
+        db_event = db.get(Event, event_id)
+        if not db_event:
+            raise HTTPException(status_code=404, detail="Event not found")
+        event_data = event.dict(exclude_unset=True)
+        for key, value in event_data.items():
+            setattr(db_event, key, value)
+        db.add(db_event)
+        db.commit()
+        db.refresh(db_event)
+        return db_event
 
 
 """
@@ -128,6 +79,11 @@ def create_hero(event: EventCreate):
 """
 
 
-# @app.delete("/events{id}")
-# async def delete_event():
-#     pass
+@app.delete("/event/{event_id}")
+def delete_event(event_id: int, db: Session = Depends(get_session)):
+        event = db.get(Event, event_id)
+        if not event:
+            raise HTTPException(status_code=404, detail="Event not found")
+        db.delete(event)
+        db.commit()
+        return {"ok": True}

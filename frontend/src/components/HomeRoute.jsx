@@ -45,7 +45,7 @@ const HomeRoute = () => {
       </main>
 
       <footer className='mt-16 bg-white grid md:grid-flow-col md:justify-between items-center lg:px-20 md:px-10 px-3 text-center md:text-left'>
-        <div className='grid grid-cols-2 max-w-lg items-center mx-auto md:mx-0'>
+        <div className='grid sm:grid-cols-2 max-w-lg items-center mx-auto md:mx-0'>
           <div>            
             <img src={footerLogo} alt="footerLogo"/>
           </div>
@@ -53,7 +53,7 @@ const HomeRoute = () => {
           <ul className='mx-4 mb-16 sm:mb-0'>
             {footerNavigation.map((nav) => {
               return (
-                <li key={nav.id} className='inline-block mx-2 font-round font-semibold p-0.5 cursor-pointer hover:text-sky-500 transition'>
+                <li key={nav.id} className='inline-block mx-1.5 font-montserrat p-0.5 cursor-pointer hover:text-customBlue transition'>
                   <Link to={nav.url}>
                     {nav.name}
                   </Link>
