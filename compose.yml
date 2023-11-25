@@ -1,4 +1,4 @@
-version: "1"
+version: "3.8"
 
 services:
   db:
@@ -19,10 +19,13 @@ services:
       timeout: 5s
       retries: 5
 
-  # frontend:
-  #   build: ./frontend
-  #   ports:
-  #     - "8001:8001"
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    # depends_on:
+    #   - backend
+    restart: always
 
   backend:
     build: ./backend

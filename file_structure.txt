@@ -1,0 +1,38 @@
+/backend
+|-- app
+|   |-- __init__.py
+|   |-- main.py          # FastAPI app instance, routes
+|   |-- dependencies.py  # Dependencies, DB sessions
+|   |-- models.py        # Database models
+|   |-- schemas.py       # Pydantic models for request/response
+|   |-- crud.py          # CRUD operations for DB
+|   `-- api
+|       `-- v1           # Versioning for API
+|           |-- __init__.py
+|           |-- endpoints.py  # Endpoints for your API
+|           `-- ...           # Other version-specific modules
+|-- tests
+|   |-- __init__.py
+|   `-- test_api.py      # Test cases for your API
+/frontend
+|-- public
+|   |-- favicon.ico
+|   `-- index.html
+|-- src
+|   |-- assets
+|   |-- components
+|   |-- ReduxStore
+|   |-- App.js
+|   |-- data.js
+|   |-- index.css
+|   |-- index.js
+|-- .dockerignore
+|-- .gitignore
+|-- Dockerfile           # Docker configuration
+|-- package-lock.json
+|-- package.json
+|-- tailwind.config.js
+/
+|-- compose.yml   # Docker compose for service orchestration
+`-- README.md
+
