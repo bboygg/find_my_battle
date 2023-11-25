@@ -38,7 +38,6 @@ postgresql_url = (
     f"postgresql+psycopg://postgres:password@db:5432/{postgresql_file_name}"
 )
 
-# connect_args = {"check_same_thread": False}
 engine = create_engine(postgresql_url, echo=True)
 
 
@@ -78,7 +77,7 @@ def root():
 """
 
 
-@app.get("/events")
+@app.get("/events/")
 async def get_events():
     with Session(engine) as session:
         events = session.exec(select(Event)).all()
