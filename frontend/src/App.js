@@ -30,7 +30,7 @@ const App = createBrowserRouter([
 				element: <Contact />,
 			},
 			{
-				path: "battles/:userId",
+				path: "battles/:eventId",
 				element: <SingleEvent />,
 			},
 		],

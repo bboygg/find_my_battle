@@ -30,7 +30,7 @@ export const SocialMediaIcons = () => {
 export const EventDisplayText = ({text, event}) => {
 
   return (
-    <div className='sm:text-2xl text-lg max-w-lg grid grid-cols-2 capitalize my-4'>
+    <div className='sm:text-2xl text-lg max-w-xl grid grid-cols-2 capitalize my-4'>
       <span>{text}</span> <span>{event}</span>
     </div>
   )

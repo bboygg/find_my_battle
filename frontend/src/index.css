@@ -43,8 +43,24 @@
   .transition {
     @apply transition-all duration-300 ease-linear delay-100
   }
-}
 
-.h2 {
-  @apply text-customGreen text-7xl text-center col-span-4 mb-10 font-bangers;
+  .h2 {
+    @apply text-customGreen text-7xl text-center col-span-4 mb-10 font-bangers;
+  }
+
+  .skeleton {
+    opacity: .7;
+    animation: skeleton-loading 1s linear infinite alternate;
+    -webkit-animation: skeleton-loading 1s linear infinite alternate;
+  }
+  
+  @keyframes skeleton-loading {
+    0% {
+      background-color: hsl(200, 20%, 70%)
+    }
+  
+    100% {
+      background-color: hsl(200, 20%, 95%)
+    }
+  }
 }
