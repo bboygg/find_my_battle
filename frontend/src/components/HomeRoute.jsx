@@ -40,8 +40,20 @@ const HomeRoute = () => {
         </div>
       </main>
 
-      <footer>
+      <footer className='mt-16 bg-white'>
+        <div>
+          <div>
+            <div>
+             <img src="" alt="" />
+            </div>
+            <h3></h3>
+          </div>
+          <ul>
+            {}
+          </ul>
+        </div>
 
+        <small>Copyright&#169; 2023 Find My Battle</small>
       </footer>
     </div>
   )
