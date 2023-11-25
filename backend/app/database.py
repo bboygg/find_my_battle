@@ -1,7 +1,7 @@
 from sqlmodel import SQLModel, create_engine, Session
 from .event_model import Event
 import csv
-import os
+from datetime import datetime
 
 postgresql_file_name = "find_my_battle"
 postgresql_url = (
@@ -35,16 +35,22 @@ def read_events_from_csv(file_path):
                 id=row["id"],
                 organizer_id=row["organizer_id"],
                 name=row["name"],
-                link=row["link"],
-                description=row["description"],
-                date=row["date"],
-                address=row["address"],
+                date=datetime.strptime(row["date"], "%m/%d/%Y")
+                if row["date"]
+                else None,
                 city=row["city"],
                 country=row["country"],
                 genre=row["genre"],
                 format=row["format"],
-                reg_start=row["reg_start"],
-                reg_end=row["reg_end"],
+                link=row["link"],
+                description=row["description"],
+                address=row["address"],
+                reg_start=datetime.strptime(row["reg_start"], "%m/%d/%Y")
+                if row["reg_start"]
+                else None,
+                reg_end=datetime.strptime(row["reg_end"], "%m/%d/%Y")
+                if row["reg_end"]
+                else None,
             )
             events.append(event)
     return events
