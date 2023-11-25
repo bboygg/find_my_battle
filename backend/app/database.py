@@ -32,14 +32,17 @@ def read_events_from_csv(file_path):
         reader = csv.DictReader(csvfile)
         for row in reader:
             event = Event(
+                id=row["id"],
+                organizer_id=row["organizer_id"],
                 name=row["name"],
-                description=row["description"],
                 link=row["link"],
-                genre=row["genre"],
-                format=row["format"],
+                description=row["description"],
+                date=row["date"],
+                address=row["address"],
                 city=row["city"],
                 country=row["country"],
-                address=row["address"],
+                genre=row["genre"],
+                format=row["format"],
                 reg_start=row["reg_start"],
                 reg_end=row["reg_end"],
             )

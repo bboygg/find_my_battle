@@ -1,8 +1,9 @@
 from fastapi import FastAPI, HTTPException, Depends
 from typing import List, Optional
-from .database import create_db_and_tables, create_events, get_session
-from .event_model import Event, EventRead, EventCreate, EventUpdate
+from pydantic import UUID4
 from sqlmodel import Session, select
+from .database import create_db_and_tables, create_events, get_session
+from .event_model import Event, EventRead, EventReadAll, EventCreate, EventUpdate
 
 
 app = FastAPI()
@@ -24,7 +25,7 @@ def root():
 """
 
 
-@app.get("/events/")
+@app.get("/events/", response_model=EventReadAll)
 async def get_events(db: Session = Depends(get_session)):
     events = db.exec(select(Event)).all()
     return events
@@ -36,7 +37,7 @@ async def get_events(db: Session = Depends(get_session)):
 
 
 @app.get("/events/{event_id}", response_model=EventRead)
-def read_hero(event_id: int, db: Session = Depends(get_session)):
+def read_hero(event_id: UUID4, db: Session = Depends(get_session)):
     event = db.get(Event, event_id)
     if not event:
         raise HTTPException(status_code=404, detail="Event not found")
@@ -61,7 +62,7 @@ def create_hero(event: EventCreate, db: Session = Depends(get_session)):
 
 
 @app.patch("/events/{event_id}", response_model=EventRead)
-def update_event(event_id: int, event: EventUpdate, db: Session = Depends(get_session)):
+def update_event(event_id: UUID4, event: EventUpdate, db: Session = Depends(get_session)):
         db_event = db.get(Event, event_id)
         if not db_event:
             raise HTTPException(status_code=404, detail="Event not found")
@@ -80,7 +81,7 @@ def update_event(event_id: int, event: EventUpdate, db: Session = Depends(get_se
 
 
 @app.delete("/event/{event_id}")
-def delete_event(event_id: int, db: Session = Depends(get_session)):
+def delete_event(event_id: UUID4, db: Session = Depends(get_session)):
         event = db.get(Event, event_id)
         if not event:
             raise HTTPException(status_code=404, detail="Event not found")
