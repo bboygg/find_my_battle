@@ -3,8 +3,8 @@ import {
 	FaFacebook,
 	FaLinkedin,
 	FaMailBulk,
-	FaMapMarked,
-	FaMobileAlt,
+	// FaMapMarked,
+	// FaMobileAlt,
 	FaTwitter,
 } from "react-icons/fa";
 
@@ -60,22 +60,22 @@ export const socialIcons = [
 ];
 
 export const contactObj = [
+	// {
+	// 	id: 1,
+	// 	icon: FaMobileAlt,
+	// 	title: "Call Us On",
+	// 	text: "+86-123453435346",
+	// },
 	{
 		id: 1,
-		icon: FaMobileAlt,
-		title: "Call Us On",
-		text: "+86-123453435346",
-	},
-	{
-		id: 2,
 		icon: FaMailBulk,
 		title: "Email Us At",
-		text: "YourEmail@gmail.com",
+		text: "findmybattle@gmail.com",
 	},
-	{
-		id: 3,
-		icon: FaMapMarked,
-		title: "Visit Office",
-		text: "No.adrress",
-	},
+	// {
+	// 	id: 3,
+	// 	icon: FaMapMarked,
+	// 	title: "Visit Office",
+	// 	text: "No.adrress",
+	// },
 ];
