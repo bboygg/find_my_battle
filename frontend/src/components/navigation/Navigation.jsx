@@ -10,9 +10,9 @@ const Navigation = ({handleCloseSideBar, HandleShowNavLinks, showNavLinks}) => {
         ${showNavLinks ? "translate-x-0 opacity-100 visible" : "-translate-x-full opacity-0 invisible"}`}>
         {Navigations.map((nav) => {
           return (
-            <li key={nav.id} className='sm:inline-block mx-4 py-1 px-px text-lg font-round cursor-pointer font-medium relative after:absolute after:inset-x-0 after:bg-sky-500 after:h-0.5 after:top-full
+            <li key={nav.id} className='sm:inline-block mx-4 py-1 px-px text-lg font-montserrat cursor-pointer font-medium relative after:absolute after:inset-x-0 after:bg-customBlue after:h-0.5 after:top-full
             after:w-0 after:opacity-0 hover:after:w-[60%] hover:after:opacity-100 transitionAfter' onClick={handleCloseSideBar}>
-              <NavLink to={nav.url} end className={({ isActive }) => isActive ?  "text-sky-600" :  "text-teal-400"}>
+              <NavLink to={nav.url} end className={({ isActive }) => isActive ?  "text-customBlue" :  "text-customBlack"}>
                 {nav.name}
               </NavLink>
             </li>
@@ -20,7 +20,7 @@ const Navigation = ({handleCloseSideBar, HandleShowNavLinks, showNavLinks}) => {
         })}
       </ul>
 
-      <button className="text-slate-800 sm:hidden text-2xl cursor-pointer hover:bg-teal-400 transition rounded-sm absolute top-1.5 right-2  p-0.5 shadow-md shadow-black" onClick={HandleShowNavLinks}>
+      <button className="text-slate-800 sm:hidden text-2xl cursor-pointer hover:bg-customBlue transition rounded-sm absolute top-1.5 right-2  p-0.5 shadow-md shadow-black" onClick={HandleShowNavLinks}>
           {showNavLinks ? <FaTimes className="gird items-center rounded-sm"/> : <FaBars className="gird items-center rounded-sm"/>}
         </button>   
     </nav>
