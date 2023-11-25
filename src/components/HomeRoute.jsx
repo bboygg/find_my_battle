@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import { useWindowSize } from "@uidotdev/usehooks";
 import Navigation from './navigation/Navigation'
+import footerLogo from "./../assets/images/footerLogo.webp"
+import { Navigations } from '../data';
 
 const HomeRoute = () => {
   const [showNavLinks, setShowNavLinks] = useState(false)
@@ -16,6 +18,8 @@ const HomeRoute = () => {
   const handleCloseSideBar = () => {
     setShowNavLinks(() => false)
   }
+
+  const footerNavigation = [Navigations[1], Navigations[3], Navigations[4]]
 
   // Handle closing of navigation bar if the screen width changes
   useEffect (() => {
@@ -40,16 +44,22 @@ const HomeRoute = () => {
         </div>
       </main>
 
-      <footer className='mt-16 bg-white'>
-        <div>
-          <div>
-            <div>
-             <img src="" alt="" />
-            </div>
-            <h3></h3>
+      <footer className='mt-16 bg-white grid md:grid-flow-col md:justify-between items-center lg:px-20 md:px-10 px-3 text-center md:text-left'>
+        <div className='grid grid-cols-2 max-w-lg items-center mx-auto md:mx-0'>
+          <div>            
+            <img src={footerLogo} alt="" />
           </div>
-          <ul>
-            {}
+
+          <ul className='mx-4'>
+            {footerNavigation.map((nav) => {
+              return (
+                <li key={nav.id} className='inline-block mx-2 font-round font-semibold p-0.5 cursor-pointer hover:text-sky-500 transition'>
+                  <Link to={nav.url}>
+                    {nav.name}
+                  </Link>
+                </li>
+              )
+            })}
           </ul>
         </div>
 
