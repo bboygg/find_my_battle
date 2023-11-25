@@ -37,11 +37,8 @@ class EventCreate(EventBase):
 class EventRead(EventBase):
     id: UUID4
     
-<<<<<<< HEAD
-class EventReadAll(SQLModel): 
-=======
+    
 class EventReadAll(SQLModel):
->>>>>>> deb1ef227e1c03d6786470e269e4168a76725c0a
     id: Optional[UUID4] = None
     name: Optional[str] = None
     date: Optional[datetime] = None
