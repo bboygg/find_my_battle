@@ -26,7 +26,7 @@
     @apply bg-transparent w-full border-slate-300 rounded-lg shadow-sm 
       focus:outline-none focus:border-pink-400 focus:ring-0 mb-3 
       caret-pink-500 text-lg text-slate-400 font-bold border 
-      border-solid outline-none ring-0 h-auto resize-none
+      border-solid outline-none ring-0 h-auto resize-none px-2 py-1.5
   }
 
   textarea {

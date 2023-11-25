@@ -1,3 +1,13 @@
+import {
+	FaDribbble,
+	FaFacebook,
+	FaLinkedin,
+	FaMailBulk,
+	FaMapMarked,
+	FaMobileAlt,
+	FaTwitter,
+} from "react-icons/fa";
+
 export const Navigations = [
 	{
 		id: 0,
@@ -122,5 +132,49 @@ export const EventList = [
 		location: "Tyokyo, japan",
 		Genre: "Locking",
 		Format: "Crew battle",
+	},
+];
+
+export const socialIcons = [
+	{
+		id: 0,
+		icon: FaDribbble,
+		link: "https://twitter.com/SamsonChiemezie",
+	},
+	{
+		id: 1,
+		icon: FaFacebook,
+		link: "https://twitter.com/SamsonChiemezie",
+	},
+	{
+		id: 2,
+		icon: FaLinkedin,
+		link: "https://twitter.com/SamsonChiemezie",
+	},
+	{
+		id: 3,
+		icon: FaTwitter,
+		link: "https://twitter.com/SamsonChiemezie",
+	},
+];
+
+export const contactObj = [
+	{
+		id: 1,
+		icon: FaMobileAlt,
+		title: "Call Us On",
+		text: "+86-123453435346",
+	},
+	{
+		id: 2,
+		icon: FaMailBulk,
+		title: "Email Us At",
+		text: "YourEmail@gmail.com",
+	},
+	{
+		id: 3,
+		icon: FaMapMarked,
+		title: "Visit Office",
+		text: "No.adrress",
 	},
 ];
