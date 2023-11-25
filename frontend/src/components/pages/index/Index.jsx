@@ -16,7 +16,7 @@ const Index = () => {
             <p className='text-sm 2xl:text-lg font-montserrat sm:text-base'>
               Welcome to Find Your Battle, your ultimate source for breaking battle updates in Korea and beyond! We're dedicated to keeping breaking enthusiasts informed about upcoming B-boy battles, jams, cyphers, and championships. You'll never miss a beat, staying on top of the freshest breaking events happening in your area.
             </p>
-            <button className='mt-20 bg-customBlue font-montserrat  rounded-md px-5 py-2 hover:bg-customGreen transition uppercase'>
+            <button className='mt-20 bg-customBlue font-montserrat rounded-md px-5 py-2 hover:bg-customGreen transition uppercase'>
               Learn More
             </button>
           </div>
@@ -60,8 +60,6 @@ const Index = () => {
                   <div className='col-span-1'>
                     {event.Format}
                   </div>    
-
-                  {/* <span className='text-sm text-stone-400 italic capitalize hidden group-hover:block'>{event.name}</span>                              */}
                 </li>
               )
             })}
