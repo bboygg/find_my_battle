@@ -8,13 +8,12 @@ const Contact = () => {
       <div className="text-center text-white pt-16">
 
         <>
-          <h2 className="text-green-500 h2 font-lora uppercase italic font-extrabold tracking-tighter mb-16 text-center text-4xl">
+          <h2 className="h2">
             Contact
           </h2>
 
-          <p className="sm:text-lg lg:text-2xl font-round">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur, facere temporibus iusto id,
-            aperiam tempore hic ex aliquid nemo totam ad.
+          <p className="sm:text-lg lg:text-2xl mb-10">
+          Got a question or have some feedback? Feel free to reach out to us – we're here to help!
           </p>
         </>
 
@@ -22,8 +21,8 @@ const Contact = () => {
           {contactObj.map((data) => {
             return (
               <li key={data.id}>
-                <data.icon className='inline-block text-4xl text-green-400 hover:text-green-300 cursor-pointer transition-colors duration-200 ease-linear'/>
-                <h3 className="my-2 font-lora tracking-wide text-2xl">{data.title}</h3>
+                <data.icon className='inline-block text-4xl text-customGreen hover:text-customBlue cursor-pointer transition-colors duration-200 ease-linear'/>
+                <h3 className="my-2 font-bangers text-2xl">{data.title}</h3>
                 <p className="inline-block">{data.text}</p>
               </li>
             )
@@ -41,7 +40,7 @@ const Contact = () => {
           <textarea placeholder="Your Message"/>
 
           <div className='text-right uppercase'>
-            <Button text={"Send Message"} color={"bg-teal-500"}/>
+            <Button text={"Send Message"} color={"bg-customBlue"}/>
           </div>
         </form>
 

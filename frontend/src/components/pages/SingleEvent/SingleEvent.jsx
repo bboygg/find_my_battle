@@ -24,7 +24,7 @@ const SingleEvent = () => {
             <EventDisplayText text={"Format"} event={Event.format}/>
             <EventDisplayText text={"description"}/>
 
-            <p className='text-lg lg:text-2xl font-round font-montserrat pt-2'>
+            <p className='text-lg lg:text-2xl font-montserrat pt-2'>
               {Event.description}
             </p>
           </div>
@@ -35,7 +35,7 @@ const SingleEvent = () => {
       </div>
 
       <div className='text-center py-3'>
-        <Button text={"All Battles"} color={"bg-teal-500 text-white"}/>
+        <Button text={"All Battles"} color={"bg-customBlue text-white"}/>
       </div>
     </section>
   )

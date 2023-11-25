@@ -40,7 +40,7 @@ export const EventDisplayText = ({text, event}) => {
 export const EventListHead = ({index}) => {
 
   return (   
-    <li className="even:bg-[#e2e2e2] group py-2 px-2 rounded capitalize cursor-pointer lg:text-base grid grid-cols-6 gap-x-4 font-bold text-xl font-round">
+    <li className="even:bg-[#e2e2e2] group py-2 px-2 rounded uppercase cursor-pointer lg:text-base grid grid-cols-6 gap-x-4 text-xl">
       <div className='col-span-1'> 
         date
       </div>
