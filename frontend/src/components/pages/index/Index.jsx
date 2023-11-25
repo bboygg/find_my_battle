@@ -20,10 +20,10 @@ const Index = () => {
             <p className='text-sm 2xl:text-lg font-montserrat sm:text-base mt-6 md:mt-0'>
               Welcome to Find Your Battle, your ultimate source for breaking battle updates in Korea and beyond! We're dedicated to keeping breaking enthusiasts informed about upcoming B-boy battles, jams, cyphers, and championships. You'll never miss a beat, staying on top of the freshest breaking events happening in your area.
             </p>
-
-            <button className='mt-20 bg-customBlue font-montserrat  rounded-md px-6 py-2.5 hover:bg-customGreen transition uppercase'>
-              Learn More
-            </button>
+            <br/>
+            <Link to={"/about"} className='mt-20 font-montserrat  rounded-md py-2.5 hover:bg-customGreen transition uppercase'>
+             <Button color={"bg-customBlue"} text={"Learn More"}/>
+            </Link>
           </div>
 
           <div className='order-first md:order-last'>
@@ -88,7 +88,7 @@ const Index = () => {
 
         <div className='col-span-1 grid grid-cols-2 gap-4 max-w-xs mx-auto mt-12 lg:mt-0'>
           <Link to={"https://docs.google.com/forms/d/e/1FAIpQLSfY_zPo-FXo3ZEyoFf_TXkb1pWcNkEwR8bMcJJ-hlZHovKPuw/viewform"}>
-            <Button color={"text-white  font-montserrat bg-customBlue hover:text-white"} text={"join today"}/>
+            <Button color={"text-white  font-montserrat bg-customBlue hover:text-white"} text={"Add Battle"}/>
           </Link>
           <Link to={"/contact"}>
             <Button color={"text-customBlue  font-montserrat bg-white hover:text-white"} text={"contact us"}/>
