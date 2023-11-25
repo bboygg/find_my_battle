@@ -12,6 +12,8 @@ class Event(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     uuid: Optional[UUID] = Field(default=None)
     name: str
+    genre: str
+    format: str
     city: str
     country: str
     address: str
