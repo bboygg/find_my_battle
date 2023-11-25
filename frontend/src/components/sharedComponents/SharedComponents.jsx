@@ -25,3 +25,41 @@ export const SocialMediaIcons = () => {
     </ul>
   )
 }
+
+
+export const EventDisplayText = ({text, event}) => {
+
+  return (
+    <div className='sm:text-2xl text-lg max-w-lg grid grid-cols-2 capitalize my-4'>
+      <span>{text}</span> <span>{event}</span>
+    </div>
+  )
+}
+
+
+export const EventListHead = ({index}) => {
+
+  return (   
+    <li className="even:bg-[#e2e2e2] group py-2 px-2 rounded capitalize cursor-pointer lg:text-base grid grid-cols-6 gap-x-4 font-bold text-xl font-round">
+      <div className='col-span-1'> 
+        date
+      </div>
+
+      <div className={index ? "col-span-2" : "col-span-3"}>
+        Name
+      </div>    
+
+      <div className='col-span-1'>
+        location
+      </div> 
+
+      {index && <div className='col-span-1'>
+        Genre
+      </div>}
+
+      <div className='col-span-1'>
+        Format
+      </div>    
+    </li>
+  )
+}
