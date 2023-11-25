@@ -46,5 +46,5 @@
 }
 
 .h2 {
-  @apply text-customGreen text-7xl col-span-4 font-bangers;
+  @apply text-customGreen text-7xl text-center col-span-4 mb-10 font-bangers;
 }

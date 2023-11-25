@@ -53,7 +53,7 @@ const HomeRoute = () => {
           <ul className='mx-4'>
             {footerNavigation.map((nav) => {
               return (
-                <li key={nav.id} className='inline-block mx-2 font-round font-semibold p-0.5 cursor-pointer hover:text-sky-500 transition'>
+                <li key={nav.id} className='inline-block mx-2 font-montserrat p-0.5 cursor-pointer hover:text-customBlue transition'>
                   <Link to={nav.url}>
                     {nav.name}
                   </Link>
