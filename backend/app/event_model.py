@@ -13,8 +13,10 @@ class EventBase(SQLModel):
     address: str
     city: str
     country: str
-    genre: List[str] = Field(default=[], sa_column=Column(ARRAY(String())))
-    format: List[str] = Field(default=[], sa_column=Column(ARRAY(String())))  # Changed to a list of strings
+    # genre: List[str] = Field(default=[], sa_column=Column(ARRAY(String())))
+    # format: List[str] = Field(default=[], sa_column=Column(ARRAY(String())))
+    genre: List[str] = Field(sa_column=Column(ARRAY(String)))
+    format: List[str] = Field(sa_column=Column(ARRAY(String)))
     reg_start: Optional[datetime] = Field(default=None)
     reg_end: Optional[datetime] = Field(default=None)
 
@@ -36,6 +38,7 @@ class EventRead(EventBase):
     id: UUID4
     
 class EventReadAll(SQLModel):
+    id: Optional[UUID4] = None
     name: Optional[str] = None
     date: Optional[datetime] = None
     city: Optional[str] = None
