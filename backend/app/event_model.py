@@ -1,26 +1,27 @@
 from typing import List, Optional
 from pydantic import validator, UUID4
-from sqlmodel import Field, Relationship, SQLModel
+from sqlmodel import Field, Relationship, SQLModel, UUID
 from datetime import datetime, date, time, timedelta, UTC
 from uuid import uuid4
 
 
 class EventBase(SQLModel):
     name: str
-    description: str
     link: str
-    genre: str
-    format: str
+    description: str
+    date: Optional[datetime] = Field(default=None)
+    address: str
     city: str
     country: str
-    address: str
-    reg_start: datetime = Field(default=datetime.utcnow())
-    reg_end: Optional[date] = Field(default=None)
+    genre: str
+    format: str
+    reg_start: Optional[datetime] = Field(default=None)
+    reg_end: Optional[datetime] = Field(default=None)
 
 
 class Event(EventBase, table=True):
-    id: Optional[UUID4] = Field(default=uuid4, primary_key=True)
-    organizer_id: int | None = Field(default=None)  # uses user_id
+    id: Optional[UUID4] = Field(default_factory=uuid4, primary_key=True)
+    organizer_id: UUID4 | None = Field(default=None)  # uses user_id    
     
     @validator('id', pre=True, always=True)
     def default_id(cls, v):
@@ -32,7 +33,16 @@ class EventCreate(EventBase):
 
 
 class EventRead(EventBase):
-    id: int
+    id: UUID4
+    
+class EventReadAll(SQLModel):
+    id: UUID4
+    name: Optional[str] = None
+    date: Optional[datetime] = None
+    city: Optional[str] = None
+    country: Optional[str] = None
+    genre: Optional[str] = None
+    format: Optional[str] = None
 
 
 class EventUpdate(SQLModel):
