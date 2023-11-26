@@ -1,6 +1,6 @@
 from typing import List, Optional
 from pydantic import validator, UUID4
-from sqlmodel import Field, Relationship, SQLModel, ARRAY, String, Column
+from sqlmodel import Field, SQLModel, ARRAY, String, Column
 from datetime import datetime, date
 from uuid import uuid4
 
