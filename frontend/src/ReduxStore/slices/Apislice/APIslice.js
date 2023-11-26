@@ -6,7 +6,11 @@ export const apiSlice = createApi({
 	reducerPath: "api",
 
 	// All of our requests will have URLs starting with '/'
+<<<<<<< HEAD
 	baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000/" }),
+=======
+	baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000" }),
+>>>>>>> 59afcf12d1978d93b8d5f34091dfb702f626a894
 
 	// automatic refreshing with cache invalidation
 	tagTypes: ["Event"],

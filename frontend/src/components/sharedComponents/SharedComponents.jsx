@@ -28,12 +28,23 @@ export const SocialMediaIcons = () => {
 
 
 export const EventDisplayText = ({text, event}) => {
-
+ 
   return (
-    <div className='sm:text-2xl text-base max-w-4xl grid grid-cols-2 capitalize my-4 cursor-pointer'>
-      <span>{text}</span> <span>{event}</span>
+    <div className='text-lg max-w-4xl capitalize my-4 cursor-pointer'>
+      <span>{text}</span> <span className="inline-block ml-[10%]  text-white px-2">{event}</span>
     </div>
   )
+}
+
+export const ListArrays = ({list}) => {
+  const Object = list?.map((title, id) => ({id: id, title: title}))
+  return Object.map((item) => {
+    return (
+      <>
+        <span key={item.id} className="bg-slate-300 text-lg py-px inline-block mr-1.5 text-black px-2.5 rounded-3xl">{item.title}</span>
+      </>
+    )
+  })  
 }
 
 
