@@ -2,6 +2,7 @@ import React from 'react'
 import logo from "./../../../assets/images/logo-trans.png"
 import { Button, EventListHead } from '../../sharedComponents/SharedComponents'
 import { Link } from 'react-router-dom'
+import MailchimpForm from '../mailChimpForm'
 import { useFetchedEvents } from '../../../Spinners/BattleSpinner'
 
 const Index = () => {
@@ -94,6 +95,8 @@ const Index = () => {
           </Link>
         </div>
       </section>
+      {/* === E-MAIL Subscription === */}
+      <MailchimpForm />
     </article>
   )
 }
