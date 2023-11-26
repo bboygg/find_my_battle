@@ -3,7 +3,7 @@ import { apiSlice } from "../Apislice/APIslice";
 export const extendedEventsApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
 		getEvent: builder.query({
-			query: () => "events/",
+			query: () => "events",
 			providesTags: (result = [], error, arg) => [
 				"Event",
 				...result.map(({ id }) => ({ type: "Event", id })),

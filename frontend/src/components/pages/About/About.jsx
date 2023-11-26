@@ -4,7 +4,7 @@ import { SocialMediaIcons } from '../../sharedComponents/SharedComponents'
 const About = () => {
   return (
     <div>
-      <div className='max-w-4xl mx-auto pt-20 mb-10'>
+      <div className='max-w-4xl mx-auto pt-20 pb-24'>
         <h2 className='h2'>About</h2>
         <p className='text-lg lg:text-2xl text-center'>
           Find My Battle is your ultimate source for breaking battle updates in Korea and beyond! We're dedicated to keeping breaking enthusiasts 
