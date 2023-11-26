@@ -3,8 +3,6 @@ import {
 	FaFacebook,
 	FaLinkedin,
 	FaMailBulk,
-	// FaMapMarked,
-	// FaMobileAlt,
 	FaTwitter,
 } from "react-icons/fa";
 
@@ -40,42 +38,30 @@ export const socialIcons = [
 	{
 		id: 0,
 		icon: FaDribbble,
-		link: "https://twitter.com/SamsonChiemezie",
+		link: "https://twitter.com",
 	},
 	{
 		id: 1,
 		icon: FaFacebook,
-		link: "https://twitter.com/SamsonChiemezie",
+		link: "https://twitter.com",
 	},
 	{
 		id: 2,
 		icon: FaLinkedin,
-		link: "https://twitter.com/SamsonChiemezie",
+		link: "https://twitter.com",
 	},
 	{
 		id: 3,
 		icon: FaTwitter,
-		link: "https://twitter.com/SamsonChiemezie",
+		link: "https://twitter.com",
 	},
 ];
 
 export const contactObj = [
-	// {
-	// 	id: 1,
-	// 	icon: FaMobileAlt,
-	// 	title: "Call Us On",
-	// 	text: "+86-123453435346",
-	// },
 	{
 		id: 1,
 		icon: FaMailBulk,
 		title: "Email Us At",
 		text: "findmybattle@gmail.com",
 	},
-	// {
-	// 	id: 3,
-	// 	icon: FaMapMarked,
-	// 	title: "Visit Office",
-	// 	text: "No.adrress",
-	// },
 ];
