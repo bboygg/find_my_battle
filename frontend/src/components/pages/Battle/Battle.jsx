@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import { EventListHead } from '../../sharedComponents/SharedComponents';
+import { EventListHead, ListArrays2 } from '../../sharedComponents/SharedComponents';
 import { useFetchedEvents } from '../../../Spinners/BattleSpinner';
 import SearchComponent from '../../searchComponent/SearchComponent';
 
@@ -33,7 +33,8 @@ if (action) {
 
   if (search !== "" && openSearch) {
     Event.filter(event => 
-      (event?.name?.startsWith(search) || event?.name === search?.toLocaleLowerCase() || event?.name === search?.toLocaleUpperCase()) 
+      (event?.name?.startsWith(search) || event?.name === search?.toLocaleLowerCase() || event?.name === search?.toLocaleUpperCase()
+      || event?.country?.startsWith(search) || event?.country === search?.toLocaleLowerCase() || event?.country === search?.toLocaleUpperCase()) 
       && setOneEvent((list) => [...list, event]))
 
     setOpenSearch(() => false)
@@ -84,11 +85,11 @@ useEffect(() => {
                 </Link>    
 
                 <div className='col-span-2'>
-                  {event.country}
+                  {event.city}, {event.country}
                 </div> 
 
                 <div className='col-span-2'>
-                  {event.format.join(",")}
+                  <ListArrays2 list={event.format}/>
                 </div>    
               </li>
             )

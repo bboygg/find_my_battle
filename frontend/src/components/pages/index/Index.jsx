@@ -1,6 +1,6 @@
 import React from 'react'
 import logo from "./../../../assets/images/logo-trans.png"
-import { Button, EventListHead } from '../../sharedComponents/SharedComponents'
+import { Button, EventListHead, ListArrays2 } from '../../sharedComponents/SharedComponents'
 import { Link } from 'react-router-dom'
 import MailchimpForm from '../mailChimpForm'
 import { useFetchedEvents } from '../../../Spinners/BattleSpinner'
@@ -51,20 +51,20 @@ const Index = () => {
                     {event.date.substring(0, 10)}
                   </div>
 
-                  <Link to={`battles/${event.id}`} className='col-span-2 font-medium hover:underline transition'>
+                  <Link to={`battles/${event.id}`} className='col-span-2 inline-block font-medium hover:underline transition'>
                     {event.name}
                   </Link>    
 
                   <div className='col-span-2'>
-                    {event.country},{event.city}
+                    {event.city}, {event.country}
                   </div> 
 
                   <div className='col-span-2'>
-                    {event.genre.join(",")}
+                    <ListArrays2 list={event.genre}/>
                   </div>   
 
                   <div className='col-span-2'>
-                    {event.format.join(",")}
+                    <ListArrays2 list={event.format}/>
                   </div>    
                 </li>
               )

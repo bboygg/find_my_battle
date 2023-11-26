@@ -40,9 +40,20 @@ export const ListArrays = ({list}) => {
   const Object = list?.map((title, id) => ({id: id, title: title}))
   return Object.map((item) => {
     return (
-      <>
-        <span key={item.id} className="bg-slate-300 text-lg py-px inline-block mr-1.5 text-black px-2.5 rounded-3xl">{item.title}</span>
-      </>
+      <span key={item.id}>
+        <span  className="bg-slate-300 text-lg py-px inline-block mr-1.5 text-black px-2.5 rounded-3xl">{item.title}</span>
+      </span>
+    )
+  })  
+}
+
+export const ListArrays2 = ({list}) => {
+  const Object = list?.map((title, id) => ({id: id, title: title}))
+  return Object.map((item) => {
+    return (
+      <span key={item.id}>
+        <span className="inline-block mr-px">{item.title}</span>,
+      </span>
     )
   })  
 }
