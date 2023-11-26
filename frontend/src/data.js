@@ -1,3 +1,11 @@
+import {
+	FaDribbble,
+	FaFacebook,
+	FaLinkedin,
+	FaMailBulk,
+	FaTwitter,
+} from "react-icons/fa";
+
 export const Navigations = [
 	{
 		id: 0,
@@ -7,12 +15,12 @@ export const Navigations = [
 	{
 		id: 1,
 		name: "Battles",
-		url: "battle",
+		url: "battles",
 	},
 	{
 		id: 2,
 		name: "Add Battle",
-		url: "newbattle",
+		url: "https://docs.google.com/forms/d/e/1FAIpQLSfY_zPo-FXo3ZEyoFf_TXkb1pWcNkEwR8bMcJJ-hlZHovKPuw/viewform",
 	},
 	{
 		id: 3,
@@ -26,53 +34,34 @@ export const Navigations = [
 	},
 ];
 
-export const EventList = [
+export const socialIcons = [
 	{
 		id: 0,
-		date: "date",
-		name: "name",
-		location: "location",
-		Genre: "Genre",
-		Format: "Format",
+		icon: FaDribbble,
+		link: "https://twitter.com",
 	},
 	{
 		id: 1,
-		date: 2023 - 11 - 26,
-		name: "Locking japan Crew battle(hyper link to Detail Page)",
-		location: "Tyokyo, japan",
-		Genre: "Locking",
-		Format: "Crew battle",
+		icon: FaFacebook,
+		link: "https://twitter.com",
 	},
 	{
 		id: 2,
-		date: 2023 - 11 - 25,
-		name: "Break seoul 1 on 1 (hyper link to detail page)",
-		location: "Seoul, Korea",
-		Genre: "Breaking",
-		Format: "1 vs 1",
+		icon: FaLinkedin,
+		link: "https://twitter.com",
 	},
 	{
 		id: 3,
-		date: 2023 - 11 - 26,
-		name: "Locking japan Crew battle(hyper link to Detail Page)",
-		location: "Tyokyo, japan",
-		Genre: "Locking",
-		Format: "Crew battle",
+		icon: FaTwitter,
+		link: "https://twitter.com",
 	},
+];
+
+export const contactObj = [
 	{
-		id: 4,
-		date: 2023 - 11 - 25,
-		name: "Break seoul 1 on 1 (hyper link to detail page)",
-		location: "Seoul, Korea",
-		Genre: "Breaking",
-		Format: "1 vs 1",
-	},
-	{
-		id: 5,
-		date: 2023 - 11 - 26,
-		name: "Locking japan Crew battle(hyper link to Detail Page)",
-		location: "Tyokyo, japan",
-		Genre: "Locking",
-		Format: "Crew battle",
+		id: 1,
+		icon: FaMailBulk,
+		title: "Email Us At",
+		text: "findmybattle@gmail.com",
 	},
 ];

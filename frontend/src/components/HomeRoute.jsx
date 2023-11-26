@@ -44,16 +44,16 @@ const HomeRoute = () => {
         </div>
       </main>
 
-      <footer className='mt-16 bg-white grid md:grid-flow-col md:justify-between items-center lg:px-20 md:px-10 px-3 text-center md:text-left'>
-        <div className='grid grid-cols-2 max-w-lg items-center mx-auto md:mx-0'>
+      <footer className='mt-16 bg-white grid md:grid-flow-col md:justify-between items-center lg:px-20 md:px-10 px-3 text-center md:text-left text-black'>
+        <div className='grid sm:grid-cols-2 max-w-lg items-center mx-auto md:mx-0'>
           <div>            
-            <img src={footerLogo} alt="" />
+            <img src={footerLogo} alt="footerLogo"/>
           </div>
 
-          <ul className='mx-4'>
+          <ul className='mx-4 mb-16 sm:mb-0'>
             {footerNavigation.map((nav) => {
               return (
-                <li key={nav.id} className='inline-block mx-2 font-montserrat p-0.5 cursor-pointer hover:text-customBlue transition'>
+                <li key={nav.id} className='inline-block mx-1.5 p-0.5 cursor-pointer hover:text-customBlue transition'>
                   <Link to={nav.url}>
                     {nav.name}
                   </Link>

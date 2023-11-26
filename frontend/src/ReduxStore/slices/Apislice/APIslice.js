@@ -6,10 +6,10 @@ export const apiSlice = createApi({
 	reducerPath: "api",
 
 	// All of our requests will have URLs starting with '/'
-	baseQuery: fetchBaseQuery({ baseUrl: "/" }),
+	baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000" }),
 
 	// automatic refreshing with cache invalidation
-	tagTypes: [""],
+	tagTypes: ["Event"],
 
 	// The "endpoints" represent operations and requests for this server
 	endpoints: (builder) => ({}),

@@ -2,10 +2,7 @@
 |-- app
 |   |-- __init__.py
 |   |-- main.py          # FastAPI app instance, routes
-|   |-- dependencies.py  # Dependencies, DB sessions
-|   |-- models.py        # Database models
-|   |-- schemas.py       # Pydantic models for request/response
-|   |-- crud.py          # CRUD operations for DB
+|   |-- event_model.py        # Event models
 |   `-- api
 |       `-- v1           # Versioning for API
 |           |-- __init__.py
@@ -14,6 +11,10 @@
 |-- tests
 |   |-- __init__.py
 |   `-- test_api.py      # Test cases for your API
+| Mock Data.csv
+| pyvenv.cfg
+| README.md
+| requirements.txt
 /frontend
 |-- public
 |   |-- favicon.ico
@@ -33,6 +34,5 @@
 |-- package.json
 |-- tailwind.config.js
 /
-|-- compose.yml   # Docker compose for service orchestration
-`-- README.md
-
+| compose.yml   # Docker compose for service orchestration
+` README.md

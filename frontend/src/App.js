@@ -4,8 +4,8 @@ import NotFound from "./components/pages/notfound/NotFound";
 import Index from "./components/pages/index/Index";
 import About from "./components/pages/About/About";
 import Battle from "./components/pages/Battle/Battle";
-import NewBattle from "./components/pages/Add Battle/NewBattle";
 import Contact from "./components/pages/Contact/Contact";
+import SingleEvent from "./components/pages/SingleEvent/SingleEvent";
 
 const App = createBrowserRouter([
 	{
@@ -22,16 +22,16 @@ const App = createBrowserRouter([
 				element: <About />,
 			},
 			{
-				path: "battle",
+				path: "battles",
 				element: <Battle />,
-			},
-			{
-				path: "newbattle",
-				element: <NewBattle />,
 			},
 			{
 				path: "contact",
 				element: <Contact />,
+			},
+			{
+				path: "battles/:eventId",
+				element: <SingleEvent />,
 			},
 		],
 	},
