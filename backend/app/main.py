@@ -43,8 +43,8 @@ def root():
 
 @app.get("/events/", response_model=List[EventReadAll])
 async def read_events(
-    # genre: Optional[str] = Query(None),
-    # format: Optional[str] = Query(None),
+    # genre: List[str] = Query(None),
+    # format: List[str] = Query(None),
     sort_by_name: Optional[str] = Query(None),
     sort_by_date: Optional[str] = Query(None),
     sort_by_city: Optional[str] = Query(None),
@@ -56,12 +56,10 @@ async def read_events(
     events = select(Event)
 
     # if genre:
-    #     genre_tags = genre.split(",")  # Split the string into a list
-    #     events = events.where(Event.genre.op("&&")(genre_tags))
+    #     events = events.where(Event.genre.any(genre))
 
     # if format:
-    #     format_tags = format.split(",")  # Split the string into a list
-    #     events = events.where(Event.format.op("&&")(format_tags))
+    #     events = events.where(Event.format.any(format))
 
     if sort_by_name:
         if sort_by_name == "asc":
