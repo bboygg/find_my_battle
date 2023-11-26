@@ -37,7 +37,7 @@ def root():
 
 
 """
-    GET ALL EVENTS
+    GET EVENTS
 """
 
 
@@ -89,7 +89,7 @@ async def read_events(
 
 
 """
-    GET EVENT BY ID
+    GET EVENT
 """
 
 
