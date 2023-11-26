@@ -2,10 +2,7 @@
 |-- app
 |   |-- __init__.py
 |   |-- main.py          # FastAPI app instance, routes
-|   |-- dependencies.py  # Dependencies, DB sessions
-|   |-- models.py        # Database models
-|   |-- schemas.py       # Pydantic models for request/response
-|   |-- crud.py          # CRUD operations for DB
+|   |-- event_model.py        # Event models
 |   `-- api
 |       `-- v1           # Versioning for API
 |           |-- __init__.py

@@ -8,7 +8,8 @@ postgresql_url = (
     f"postgresql+psycopg://postgres:password@db:5432/{postgresql_file_name}"
 )
 
-engine = create_engine(postgresql_url, echo=True)
+engine = create_engine(postgresql_url)
+
 
 
 def create_db_and_tables():
@@ -31,8 +32,8 @@ def read_events_from_csv(file_path):
     with open(file_path, newline="", encoding="utf-8") as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            genres = row["genre"].split(",") if row["genre"] else []
-            formats = row["format"].split(",") if row["format"] else []
+            genres = [genre.strip() for genre in row["genre"].split(",")] if row["genre"] else []
+            formats = [format.strip() for format in row["format"].split(",")] if row["format"] else []
             event = Event(
                 id=row["id"],
                 organizer_id=row["organizer_id"],
