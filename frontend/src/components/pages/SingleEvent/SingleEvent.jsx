@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, EventDisplayText } from '../../sharedComponents/SharedComponents';
+import { Button, EventDisplayText, ListArrays } from '../../sharedComponents/SharedComponents';
 import { useFetchedEventById } from '../../../Spinners/BattleSpinner';
 import { Link } from 'react-router-dom';
 import { useWindowSize } from '@uidotdev/usehooks';
@@ -34,14 +34,19 @@ const SingleEvent = () => {
             <EventDisplayText text={"city"} event={Event.city}/>
             <EventDisplayText text={"location"} event={Event.address}/>
             <EventDisplayText text={"registration period"} event={`${Event.reg_start.substring(0, 10)} to ${Event.reg_end.substring(0, 10)}`}/>
-            <a href={Event.link} target='_blank' rel='noreferrer' className='sm:text-2xl  text-base max-w-4xl grid grid-cols-2 capitalize my-4 cursor-pointer group'>
-              <span>website</span> <span className='p-2 group-hover:underline group-hover:text-sky-400 transition'>{Event.link.substring(0, short)}</span>
+            <a href={Event.link} target='_blank' rel='noreferrer' className='text-lg max-w-4xl capitalize my-4 cursor-pointer group'>
+              <span>website</span> <span className='p-2 group-hover:underline ml-[2%] inline-block group-hover:text-sky-400 transition'>{Event.link.substring(0, short)}</span>
             </a>
-            <EventDisplayText text={"Genre"} event={Event.genre.join(",")}/>
-            <EventDisplayText text={"Format"} event={Event.format.join(" ,")}/>
+
+            <div className='text-lg max-w-4xl capitalize my-4 cursor-pointer'>
+              <span className='mr-[10%] inline-block'>Genre</span> <ListArrays list={Event.genre}/>
+            </div>
+            <div className='text-lg max-w-4xl capitalize my-4 cursor-pointer'>
+              <span className='mr-[10%] inline-block'>Format</span> <ListArrays list={Event.format}/>
+            </div>
             <EventDisplayText text={"description"}/>
 
-            <p className='text-lg lg:text-2xl font-montserrat pt-2'>
+            <p className='text-lg font-montserrat pt-2'>
               {Event.description}
             </p>
           </div>
