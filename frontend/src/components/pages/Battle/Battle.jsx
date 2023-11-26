@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import Logo from "./../../../assets/images/logo-trans.png"
 import { EventListHead } from '../../sharedComponents/SharedComponents';
 import { useFetchedEvents } from '../../../Spinners/BattleSpinner';
 
@@ -14,14 +13,13 @@ const Battle = () => {
   return (
     <div className={`${isFetching && "after:opacity-40 after:bg-white relative after:absolute after:inset-0 after:z-40"}`}>
       <div>
-        <div className='grid grid-cols-5 max-w-xl mx-auto items-center max-h-28'>
-          <img src={Logo} alt="logo" className='col-span-1 max-h-24 max-w-[100px]'/>
-          <h2 className='text-customGreen text-4xl sm:text-7xl italic col-span-4 font-bangers'>Find My Battle</h2>
+        <div>
+          <h2 className='h2'>Battles</h2>
         </div>
       </div>
 
       <div className='w-full overflow-scroll md:overflow-visible my-20'>
-        <ul className='text-stone-800 font-montserrat bg-white px-10 py-7 min-w-[768px] rounded-sm'>
+        <ul className='text-stone-800 bg-white px-10 py-7 min-w-[768px] rounded-sm'>
           <EventListHead />
           {action ? Event?.map((event) => {
             return (

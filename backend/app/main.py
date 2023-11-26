@@ -1,12 +1,28 @@
 from fastapi import FastAPI, HTTPException, Depends, Query
+from fastapi.middleware.cors import CORSMiddleware
 from typing import List, Optional
 from pydantic import UUID4
-from sqlmodel import Session, select, desc, asc
+from sqlmodel import Session, select, desc
 from .database import create_db_and_tables, create_events, get_session
 from .event_model import Event, EventRead, EventReadAll, EventCreate, EventUpdate
 
 
 app = FastAPI()
+
+origins = [
+    "http://localhost",
+    "http://localhost:8080",
+    "http://localhost:3000",
+    "http://localhost:80",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.on_event("startup")
@@ -27,16 +43,26 @@ def root():
 
 @app.get("/events/", response_model=List[EventReadAll])
 async def read_events(
+    # genre: Optional[str] = Query(None),
+    # format: Optional[str] = Query(None),
     sort_by_name: Optional[str] = Query(None),
     sort_by_date: Optional[str] = Query(None),
     sort_by_city: Optional[str] = Query(None),
     sort_by_country: Optional[str] = Query(None),
-    
     offset: int = 0,
     limit: int = Query(default=100, le=100),
     session: Session = Depends(get_session),
 ):
     events = select(Event)
+
+    # if genre:
+    #     genre_tags = genre.split(",")  # Split the string into a list
+    #     events = events.where(Event.genre.op("&&")(genre_tags))
+
+    # if format:
+    #     format_tags = format.split(",")  # Split the string into a list
+    #     events = events.where(Event.format.op("&&")(format_tags))
+
     if sort_by_name:
         if sort_by_name == "asc":
             events = events.order_by(Event.name)
@@ -57,7 +83,7 @@ async def read_events(
             events = events.order_by(Event.country)
         elif sort_by_country == "desc":
             events = events.order_by(desc(Event.country))
-            
+
     events = events.offset(offset).limit(limit)
 
     events = session.exec(events).all()
