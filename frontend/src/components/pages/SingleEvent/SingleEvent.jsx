@@ -1,10 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, EventDisplayText } from '../../sharedComponents/SharedComponents';
 import { useFetchedEventById } from '../../../Spinners/BattleSpinner';
+import { Link } from 'react-router-dom';
+import { useWindowSize } from '@uidotdev/usehooks';
 
 const SingleEvent = () => {
+  const [short, setShort] = useState(15)
   const {singleEvent , eventAction, isFetching} = useFetchedEventById() 
   const Event = singleEvent
+  const size = useWindowSize();
+
+
+  useEffect (() => {
+    if(size.width < 856 ) {
+      setShort(() => 20)
+    } else if (size.width < 1092) {
+      setShort(() => 30)
+    } else {
+      setShort(() => 40)
+    }
+  }, [size])
 
   return (
     <section className={`${isFetching && "after:opacity-40 after:bg-white relative after:absolute after:inset-0 after:z-40"}`}>
@@ -19,9 +34,11 @@ const SingleEvent = () => {
             <EventDisplayText text={"city"} event={Event.city}/>
             <EventDisplayText text={"location"} event={Event.address}/>
             <EventDisplayText text={"registration period"} event={`${Event.reg_start.substring(0, 10)} to ${Event.reg_end.substring(0, 10)}`}/>
-            <EventDisplayText text={"website"} event={Event.link.substring(0, 40)}/>
-            <EventDisplayText text={"Genre"} event={Event.genre}/>
-            <EventDisplayText text={"Format"} event={Event.format}/>
+            <a href={Event.link} target='_blank' rel='noreferrer' className='sm:text-2xl  text-base max-w-4xl grid grid-cols-2 capitalize my-4 cursor-pointer group'>
+              <span>website</span> <span className='p-2 group-hover:underline group-hover:text-sky-400 transition'>{Event.link.substring(0, short)}</span>
+            </a>
+            <EventDisplayText text={"Genre"} event={Event.genre.join(",")}/>
+            <EventDisplayText text={"Format"} event={Event.format.join(" ,")}/>
             <EventDisplayText text={"description"}/>
 
             <p className='text-lg lg:text-2xl font-montserrat pt-2'>
@@ -34,9 +51,9 @@ const SingleEvent = () => {
         }
       </div>
 
-      <div className='text-center py-3'>
+      <Link to={"/battles"} className='text-center py-3 block'>
         <Button text={"All Battles"} color={"bg-customBlue text-white"}/>
-      </div>
+      </Link>
     </section>
   )
 }

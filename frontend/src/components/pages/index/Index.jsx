@@ -45,25 +45,25 @@ const Index = () => {
             <EventListHead index={true}/>
             {action ? Event.slice(0, 10)?.map((event) => {
               return (
-                <li key={event.id} className="even:bg-[#e2e2e2] group py-2 px-2 rounded capitalize cursor-pointer text-sm lg:text-base grid grid-cols-6 gap-x-4">
+                <li key={event.id} className="even:bg-[#e2e2e2] group py-2 px-2 rounded capitalize cursor-pointer text-sm lg:text-base grid grid-cols-9 gap-x-4">
                   <div className='col-span-1'> 
                     {event.date.substring(0, 10)}
                   </div>
 
-                  <div className='col-span-2'>
+                  <Link to={`battles/${event.id}`} className='col-span-2 font-medium hover:underline transition'>
                     {event.name}
-                  </div>    
+                  </Link>    
 
-                  <div className='col-span-1'>
-                    {event.country}
+                  <div className='col-span-2'>
+                    {event.country},{event.city}
                   </div> 
 
-                  <div className='col-span-1'>
-                    {event.genre}
+                  <div className='col-span-2'>
+                    {event.genre.join(",")}
                   </div>   
 
-                  <div className='col-span-1'>
-                    {event.format}
+                  <div className='col-span-2'>
+                    {event.format.join(",")}
                   </div>    
                 </li>
               )

@@ -30,7 +30,7 @@ export const SocialMediaIcons = () => {
 export const EventDisplayText = ({text, event}) => {
 
   return (
-    <div className='sm:text-2xl text-lg max-w-xl grid grid-cols-2 capitalize my-4'>
+    <div className='sm:text-2xl text-base max-w-4xl grid grid-cols-2 capitalize my-4 cursor-pointer'>
       <span>{text}</span> <span>{event}</span>
     </div>
   )
@@ -40,7 +40,7 @@ export const EventDisplayText = ({text, event}) => {
 export const EventListHead = ({index}) => {
 
   return (   
-    <li className="even:bg-[#e2e2e2] group py-2 px-2 rounded uppercase cursor-pointer lg:text-base grid grid-cols-6 gap-x-4 text-xl">
+    <li className="even:bg-[#e2e2e2] group py-2 px-2 rounded uppercase cursor-pointer lg:text-base grid grid-cols-9 gap-x-4 text-xl">
       <div className='col-span-1'> 
         date
       </div>
@@ -49,15 +49,15 @@ export const EventListHead = ({index}) => {
         Name
       </div>    
 
-      <div className='col-span-1'>
+      <div className='col-span-2'>
         location
       </div> 
 
-      {index && <div className='col-span-1'>
+      {index && <div className='col-span-2'>
         Genre
       </div>}
 
-      <div className='col-span-1'>
+      <div className='col-span-2'>
         Format
       </div>    
     </li>
