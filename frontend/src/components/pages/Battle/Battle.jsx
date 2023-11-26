@@ -7,6 +7,10 @@ import { useFetchedEvents } from '../../../Spinners/BattleSpinner';
 const Battle = () => {
   const {content , action, isFetching} = useFetchedEvents()
   const Event = content
+
+  if (action) {
+    console.log(Event);
+  }
   return (
     <div className={`${isFetching && "after:opacity-40 after:bg-white relative after:absolute after:inset-0 after:z-40"}`}>
       <div>
@@ -23,7 +27,7 @@ const Battle = () => {
             return (
               <li key={event.id} className="even:bg-[#e2e2e2] group py-2 px-2 rounded capitalize cursor-pointer text-sm lg:text-base grid grid-cols-6 gap-x-4">
                 <div className='col-span-1'> 
-                  {event.date}
+                  {event.date.substring(0, 10)}
                 </div>
 
                 <Link to={event.id} className='col-span-3 font-medium hover:underline transition'>
