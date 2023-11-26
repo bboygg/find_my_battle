@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException, Depends, Query
+from fastapi.middleware.cors import CORSMiddleware
 from typing import List, Optional
 from pydantic import UUID4
 from sqlmodel import Session, select, desc
@@ -7,6 +8,21 @@ from .event_model import Event, EventRead, EventReadAll, EventCreate, EventUpdat
 
 
 app = FastAPI()
+
+origins = [
+    "http://localhost",
+    "http://localhost:8080",
+    "http://localhost:3000",
+    "http://localhost:80",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.on_event("startup")
@@ -27,13 +43,8 @@ def root():
 
 @app.get("/events/", response_model=List[EventReadAll])
 async def read_events(
-<<<<<<< HEAD
     # genre: Optional[str] = Query(None),
     # format: Optional[str] = Query(None),
-=======
-    # genre: List[str] = Query(default=[]),
-    # format: List[str] = Query(default=[]),
->>>>>>> dev
     sort_by_name: Optional[str] = Query(None),
     sort_by_date: Optional[str] = Query(None),
     sort_by_city: Optional[str] = Query(None),
@@ -45,19 +56,12 @@ async def read_events(
     events = select(Event)
 
     # if genre:
-<<<<<<< HEAD
     #     genre_tags = genre.split(",")  # Split the string into a list
     #     events = events.where(Event.genre.op("&&")(genre_tags))
 
     # if format:
     #     format_tags = format.split(",")  # Split the string into a list
     #     events = events.where(Event.format.op("&&")(format_tags))
-=======
-    #     events = events.where(Event.genre.overlap(genre))
-
-    # if format:
-    #     events = events.where(Event.format.overlap(format))
->>>>>>> dev
 
     if sort_by_name:
         if sort_by_name == "asc":
