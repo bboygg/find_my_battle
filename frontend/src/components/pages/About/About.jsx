@@ -15,9 +15,9 @@ const About = () => {
           to be broken!
         </p>
 
-        <div className='mt-24 text-center'>
+        {/* <div className='mt-24 text-center'>
           <SocialMediaIcons />
-        </div>
+        </div> */}
       </div>     
     </div>
   )
