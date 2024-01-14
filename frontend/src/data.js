@@ -59,7 +59,7 @@ export const socialIcons = [
 
 export const contactObj = [
 	{
-		id: 1,
+		id: 0,
 		icon: FaMailBulk,
 		title: "Email Us At",
 		text: "findmybattle@gmail.com",
